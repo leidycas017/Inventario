@@ -1,4 +1,4 @@
-const API_URL = 'http://demo7771177.mockable.io/destination';
+const API_URL = 'https://demo7771177.mockable.io/destination';
 
 
 const API_SERVICES = {
