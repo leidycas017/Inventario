@@ -16,11 +16,19 @@ td {
   @apply h-12 px-6 text-sm transition duration-300 border-t border-l first:border-l-0  stroke-slate-500 text-slate-500;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-image: url('/fondo.png');
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: rgb(27, 26, 26);
   height: 100%;
 }

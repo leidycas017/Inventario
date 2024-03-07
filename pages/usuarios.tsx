@@ -1,4 +1,3 @@
-import { SideNavigation } from '@/components/ui/SideNavigation';
 import { useGetUsers } from '@/hooks/useGetUsers';
 
 const UsersPage = () => {
@@ -7,7 +6,6 @@ const UsersPage = () => {
   if (error) return <div>Ha ocurrido un error</div>;
   return (
     <>
-      <SideNavigation />
       <div className='w-full flex flex-col items-center p-10 gap-4'>
         <div className='flex flex-col items-center p-5 gap-5 bg-white'>
           <section>

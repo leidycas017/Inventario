@@ -46,7 +46,7 @@ const SideNavigation = () => {
       <aside
         id='nav-menu-4'
         aria-label='Side navigation'
-        className={`fixed top-0 bottom-0 left-0 z-40 flex w-72 flex-col border-r border-r-slate-200 bg-black bg-opacity-80 transition-transform lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-40 flex w-72 flex-col bg-black bg-opacity-80 transition-transform lg:translate-x-0 ${
           isSideNavOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
