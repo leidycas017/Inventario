@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+table {
+  @apply w-full;
+}
+th {
+  @apply h-12 px-6 text-sm font-medium border-l  text-slate-700 bg-slate-100;
+}
+tr {
+  @apply h-12 px-6 text-sm transition duration-300 border-t border-l first:border-l-0  stroke-slate-500 text-slate-500;
+  background-color: white;
+}
+td {
+  @apply h-12 px-6 text-sm transition duration-300 border-t border-l first:border-l-0  stroke-slate-500 text-slate-500;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('/fondo.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
