@@ -10,3 +10,13 @@ export interface User{
 export interface UserQuery {
     users: User[];
 }
+export interface Role{
+    id: string,
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface RolesQuery{
+    roles: Role[];
+}
