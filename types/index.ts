@@ -10,19 +10,14 @@ export interface User{
 export interface UserQuery {
     users: User[];
 }
-import { RolesQuery } from '@/types';
-import useSWR from 'swr';
 
-const useGetRoles=()=> {
-    const {data, isLoading, error } = useSWR<RolesQuery>(
-    API_SERVICES.roles,
-    fetcher
-    );
-    return{
-        roles: data?.roles,
-        isLoading,
-        error,
-    };
-};
+export interface Role{
+    id: string,
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
-export{useGetRoles};
+export interface RolesQuery{
+    roles: Role[];
+}
