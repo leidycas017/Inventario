@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {User, PrismaClient} from '@prisma/client';
+import {User} from '@prisma/client';
+import{prisma} from '@/service/prisma';
 
-const prisma = new PrismaClient();
 
 interface Response {
     user?: User;

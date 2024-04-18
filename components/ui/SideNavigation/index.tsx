@@ -1,10 +1,21 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaDolly } from 'react-icons/fa6';
 import { useRouter } from 'next/router';
 
-const SideNavigation = () => {
+interface SideNavigationProps {
+  name: string;
+  image: string;
+  email: string;
+  handleLogout: () => Promise<void>;
+}
+
+const SideNavigation = ({
+  name,
+  image,
+  email,
+  handleLogout,
+}: SideNavigationProps) => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const buttonClasses = `visible fixed left-6 top-6 z-40 order-10 block h-10 w-10 self-center rounded bg-white opacity-100 lg:hidden ${
     isSideNavOpen
@@ -50,14 +61,39 @@ const SideNavigation = () => {
           isSideNavOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
+        <button
+          title='Side navigation'
+          type='button'
+          className={buttonClasses}
+          aria-haspopup='menu'
+          aria-label='Side navigation'
+          aria-expanded={isSideNavOpen ? 'true' : 'false'}
+          aria-controls='nav-menu-4'
+          onClick={() => setIsSideNavOpen(!isSideNavOpen)}
+        >
+          <div className='absolute top-1/2 left-1/2 w-6 -translate-x-1/2 -translate-y-1/2 transform'>
+            <span
+              aria-hidden='true'
+              className='absolute block h-0.5 w-9/12 -translate-y-2 transform rounded-full bg-slate-700 transition-all duration-300'
+            ></span>
+            <span
+              aria-hidden='true'
+              className='absolute block h-0.5 w-6 transform rounded-full bg-slate-900 transition duration-300'
+            ></span>
+            <span
+              aria-hidden='true'
+              className='absolute block h-0.5 w-1/2 origin-top-left translate-y-2 transform rounded-full bg-slate-900 transition-all duration-300'
+            ></span>
+          </div>
+        </button>
         <div className='flex flex-col items-center gap-4 border-b border-slate-600 p-6'>
           <div className='shrink-0'>
             <Link
               href='/profile'
               className='relative flex h-12 w-12 items-center justify-center rounded-full text-white'
             >
-              <Image
-                src='https://i.pravatar.cc/40?img=7'
+              <img
+                src={image}
                 alt='user name'
                 title='user name'
                 width={48}
@@ -70,10 +106,8 @@ const SideNavigation = () => {
             </Link>
           </div>
           <div className='flex min-h-[2rem] w-full min-w-0 flex-col items-start justify-center gap-0 text-center'>
-            <h4 className='w-full truncate text-base text-white'>
-              Luke Skywalker
-            </h4>
-            <p className='w-full truncate text-sm text-white'>Jedi warrior</p>
+            <h4 className='w-full truncate text-base text-white'>{name}</h4>
+            <p className='w-full truncate text-sm text-white'>{email}</p>
           </div>
         </div>
         <nav
@@ -94,6 +128,7 @@ const SideNavigation = () => {
         <footer className='border-t border-slate-600 p-3'>
           <Link
             href='/'
+            onClick={handleLogout}
             className='flex items-center gap-3 rounded p-3 text-white transition-colors hover:text-indigo-500 '
           >
             <div className='flex items-center self-center '>

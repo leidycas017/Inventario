@@ -2,7 +2,7 @@ import { Tooltip } from '@/components/ui/Tooltip';
 import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
 import { DeleteUserDialog } from '@/components/usuarios/DeleteUserDialog';
 import { useState } from 'react';
-import { User } from '@/types';
+import { User } from '@prisma/client';
 import { UpdateUserDialog } from '@/components/usuarios/UpdateUserDialog';
 
 interface UsersTableActionsProps {
