@@ -1,6 +1,6 @@
 import { Dialog } from '@/components/ui/Dialog';
 import { API_SERVICES } from '@/service';
-import { User } from '@/types';
+import { User } from '@prisma/client';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
