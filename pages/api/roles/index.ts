@@ -1,7 +1,7 @@
-import {Role, PrismaClient} from '@prisma/client';
+import {Role} from '@prisma/client';
 import {NextApiRequest, NextApiResponse} from 'next';
+import{prisma} from '@/service/prisma';
 
-const prisma = new PrismaClient();
 
 interface Response{
     roles?: Role[];

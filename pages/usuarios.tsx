@@ -5,6 +5,15 @@ import { Tooltip } from '@/components/ui/Tooltip';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { NewUserDialog } from '@/components/usuarios/NewUserDialog';
 import { useState } from 'react';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
+
+const UserPageWrapper = () => {
+  return (
+    <ProtectedRoute roleName='ADMIN'>
+      <UsersPage></UsersPage>
+    </ProtectedRoute>
+  );
+};
 
 const UsersPage = () => {
   const [openNewUserDialog, setOpenNewUserDialog] = useState(false);
@@ -18,7 +27,9 @@ const UsersPage = () => {
         <div className='flex flex-col items-center p-5 gap-5 bg-white'>
           <section>
             <div className='flex items-center gap-3'>
-              <h1 className='font-black'>Gestión de usuarios</h1>
+              <h1 className='text-black font-bold text-2xl'>
+                Gestión de usuarios
+              </h1>
               <Tooltip message='Crear nuevo usuario'>
                 <button
                   type='button'
@@ -73,4 +84,4 @@ const UsersPage = () => {
     </>
   );
 };
-export default UsersPage;
+export default UserPageWrapper;
