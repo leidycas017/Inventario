@@ -2,25 +2,31 @@ import { PrimaryActionButton } from '@/components/ui/Buttons/PrimaryActionButton
 import { SecondaryActionButton } from '@/components/ui/Buttons/SecondaryActionButton';
 import { Dialog } from '@/components/ui/Dialog';
 import { RequiredMark } from '@/components/ui/Forms/RequiredMark';
-import { useGetRoles } from '@/hooks/useGetRoles';
 import { Dispatch, SetStateAction, useState, SyntheticEvent } from 'react';
 import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 import axios, { AxiosError } from 'axios';
+import { useSession } from 'next-auth/react';
 import { API_SERVICES } from '@/service';
+import { iUserSessionData } from '@/layouts';
+import { useGetUsers } from '@/hooks/useGetUsers';
 
-interface NewUserDialogProps {
+interface NewMaterialDialogProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const NewUserDialog = ({ open, setOpen }: NewUserDialogProps) => {
+const NewMaterialDialog = ({ open, setOpen }: NewMaterialDialogProps) => {
   const [loading, setLoading] = useState(false);
-  const { roles } = useGetRoles();
+  const { data: dataUsuario } = useSession();
+  const userData = dataUsuario?.user as iUserSessionData;
+  const { users: usersList } = useGetUsers();
+  const currentUserId = usersList?.find((u) => u.email == userData?.email)?.id;
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    roleId: '',
+    quantity: 0,
+    userId: currentUserId,
+    updatedAt: new Date().toISOString(),
   });
 
   const submitForm = async (e: SyntheticEvent) => {
@@ -28,17 +34,17 @@ const NewUserDialog = ({ open, setOpen }: NewUserDialogProps) => {
     setLoading(true);
 
     try {
-      // crear el usuario
+      // crear el material
       await axios.request({
         method: 'POST',
-        url: API_SERVICES.users,
+        url: API_SERVICES.materiales,
         data: {
           ...formData,
         },
       });
-      // actualizar la tabla de usuarios
-      await mutate(API_SERVICES.users);
-      toast.success('Usuario creado correctamente');
+      // actualizar la tabla de materiales
+      await mutate(API_SERVICES.materiales); // Refresh the materiales data
+      toast.success('Material creado correctamente');
       setOpen(false);
     } catch (error) {
       const errorResponse = error as AxiosError;
@@ -47,12 +53,12 @@ const NewUserDialog = ({ open, setOpen }: NewUserDialogProps) => {
 
       if (
         errorData?.message.includes(
-          'Unique constraint failed on the fields: (`email`)'
+          'Unique constraint failed on the fields: (`name`)'
         )
       ) {
-        toast.error('Error: ya existe un usuario con ese correo electrónico');
+        toast.error('Error: ya existe un material con ese nombre');
       } else {
-        toast.error('Error creando el usuario');
+        toast.error('Error creando el material');
       }
     }
 
@@ -60,69 +66,43 @@ const NewUserDialog = ({ open, setOpen }: NewUserDialogProps) => {
   };
   return (
     <Dialog
-      title='Crear nuevo usuario'
+      title='Crear nuevo material'
       open={open}
       onClose={() => setOpen(false)}
     >
       <form className='flex flex-col gap-3' onSubmit={submitForm}>
-        <label htmlFor='user-name'>
+        <label htmlFor='material-name'>
           <span>
             Nombre <RequiredMark />
           </span>
           <input
-            name='user-name'
+            name='material-name'
             type='text'
-            placeholder='Jhon Doe'
+            placeholder='material'
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </label>
-        <label htmlFor='email'>
+        <label htmlFor='saldo'>
           <span>
-            Email <RequiredMark />
+            saldo inicial <RequiredMark />
           </span>
           <input
-            name='email'
-            type='email'
-            placeholder='jhon.doe@email.com'
+            name='saldo'
+            type='number'
+            placeholder='0'
             required
-            value={formData.email}
+            value={formData.quantity}
             onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
+              setFormData({ ...formData, quantity: parseInt(e.target.value) })
             }
           />
         </label>
-        <label htmlFor='user-role'>
-          <span>
-            Rol <RequiredMark />
-          </span>
-          <select
-            name='user-role'
-            value={formData.roleId}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                roleId: e.target.value,
-              })
-            }
-            required
-          >
-            <option value='' disabled>
-              Seleccione un rol
-            </option>
-            {roles?.map((role) => {
-              return (
-                <option key={role.id} value={role.id}>
-                  {role.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+
         <div className='flex gap-3'>
           <PrimaryActionButton
-            text='Crear usuario'
+            text='Crear material'
             loading={loading}
             type='submit'
             onClick={() => {}}
@@ -139,4 +119,4 @@ const NewUserDialog = ({ open, setOpen }: NewUserDialogProps) => {
   );
 };
 
-export { NewUserDialog };
+export { NewMaterialDialog };

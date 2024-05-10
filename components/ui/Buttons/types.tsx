@@ -1,6 +1,6 @@
 export interface ActionButtonProps {
-    loading: boolean;
-    onClick: () => void;
-    text: string;
-    type?: 'button' | 'submit' | 'reset';
-  }
+  loading: boolean;
+  onClick: () => void;
+  text: string;
+  type?: 'button' | 'submit' | 'reset';
+}
