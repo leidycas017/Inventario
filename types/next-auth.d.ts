@@ -7,4 +7,6 @@ declare module 'next-auth' {
       role?: Enum_RoleName;
     };
   }
+
 }
+
