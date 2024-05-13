@@ -19,7 +19,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   return (
     <main className='h-screen w-full flex justify-center items-center'>
       <section className='flex flex-col gap-4 items-center'>
-        <h1>Esta página requiere autenticación</h1>
+        <h1 className='text-white'>Esta página requiere autenticación</h1>
 
         <Link href='/'>
           <span className='text-blue-500 text-xl'>Ir al home</span>

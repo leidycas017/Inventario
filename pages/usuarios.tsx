@@ -19,6 +19,7 @@ const UsersPage = () => {
   const [openNewUserDialog, setOpenNewUserDialog] = useState(false);
   const { users, isLoading, error } = useGetUsers();
   const { roles } = useGetRoles();
+
   if (isLoading) return <div>cargando...</div>;
   if (error) return <div>Ha ocurrido un error</div>;
   return (

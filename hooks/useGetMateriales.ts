@@ -1,18 +1,18 @@
-import { API_SERVICES, fetcher } from '@/service';
-import { MaterialQuery } from '@/types';
-import useSWR from 'swr';
+import { API_SERVICES, fetcher } from "@/service"
+import { MaterialesQuery } from "@/types"
+import useSWR from "swr";
 
 const useGetMateriales = () => {
-  const { data, isLoading, error } = useSWR<MaterialQuery>(
-    API_SERVICES.users,
-    fetcher
-  );
+    const {data, isLoading, error} = useSWR<MaterialesQuery>(
+        API_SERVICES.materiales,
+        fetcher
+    );
 
-  return {
-    materiales: data?.material,
-    isLoading,
-    error,
-  };
+    return{
+        materiales: data?.materiales,
+        isLoading,
+        error,
+    };
 };
 
-export { useGetMateriales };
+export {useGetMateriales};
