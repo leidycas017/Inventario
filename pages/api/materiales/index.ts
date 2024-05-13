@@ -35,3 +35,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Response>) => {
 };
 
 export default handler;
+

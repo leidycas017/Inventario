@@ -1,7 +1,10 @@
 import { prisma } from '@/service/prisma';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import Auth0Provider from 'next-auth/providers/auth0';
+
+
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
@@ -29,3 +32,4 @@ export const authOptions: NextAuthOptions = {
 };
 
 export default NextAuth(authOptions);
+
