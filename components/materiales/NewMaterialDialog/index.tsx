@@ -28,7 +28,6 @@ const NewMaterialDialog = ({ open, setOpen }: NewMaterialDialogProps) => {
   const userData = dataUsuario?.user as iUserSessionData;
   const { users: usersList } = useGetUsers();
   const currentUserId = usersList?.find((u) => u.email == userData?.email)?.id;
-  console.log(currentUserId);
 
   const [formData, setFormData] = useState({
     name: '',
