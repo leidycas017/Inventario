@@ -4,6 +4,7 @@ import { NewMaterialDialog } from '@/components/materiales/NewMaterialDialog';
 import { useState } from 'react';
 import { useGetMateriales } from '@/hooks/useGetMateriales';
 import { useGetUsers } from '@/hooks/useGetUsers';
+import { PrivateComponent } from '@/components/PrivateComponent';
 
 const UserPageWrapper = () => {
   return <MaterialPage></MaterialPage>;
@@ -23,15 +24,17 @@ const MaterialPage = () => {
               <h1 className='text-black font-bold text-2xl'>
                 Gestión de materiales
               </h1>
-              <Tooltip message='Crear nuevo usuario'>
-                <button
-                  type='button'
-                  onClick={() => setOpenNewMaterialDialog(true)}
-                  className='flex text-2xl mt-2 hover:scale-110 text-indigo-700'
-                >
-                  <AiOutlinePlusCircle />
-                </button>
-              </Tooltip>
+              <PrivateComponent roleName='ADMIN'>
+                <Tooltip message='Crear nuevo material'>
+                  <button
+                    type='button'
+                    onClick={() => setOpenNewMaterialDialog(true)}
+                    className='flex text-2xl mt-2 hover:scale-110 text-indigo-700'
+                  >
+                    <AiOutlinePlusCircle />
+                  </button>
+                </Tooltip>
+              </PrivateComponent>
             </div>
           </section>
           <section>

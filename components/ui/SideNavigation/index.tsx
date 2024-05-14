@@ -4,6 +4,7 @@ import { FaDolly } from 'react-icons/fa6';
 import { FaUserPlus } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { PrivateComponent } from '@/components/PrivateComponent';
+import { SiBookstack } from 'react-icons/si';
 
 interface SideNavigationProps {
   name: string;
@@ -128,6 +129,11 @@ const SideNavigation = ({
               <NavbarLink
                 href='/materiales'
                 title='materiales'
+                icon={<SiBookstack />}
+              />
+              <NavbarLink
+                href='/inventories'
+                title='inventario'
                 icon={<FaDolly />}
               />
             </ul>
