@@ -10,7 +10,7 @@ const useGetInventories = () => {
     );
 
     return{
-        materiales: data?.inventories,
+        inventories: data?.inventories,
         isLoading,
         error,
     };
