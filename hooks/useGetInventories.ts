@@ -1,7 +1,10 @@
 import { API_SERVICES, fetcher } from "@/service"
 import { inventoriesQuery } from "@/types";
+import useSWR, { mutate } from 'swr';
 
-import useSWR from "swr";
+const refetchInventories = async () => {
+    await mutate(API_SERVICES.users);
+  };
 
 const useGetInventories = () => {
     const {data, isLoading, error} = useSWR<inventoriesQuery>(
@@ -16,4 +19,4 @@ const useGetInventories = () => {
     };
 };
 
-export {useGetInventories};
+export {useGetInventories, refetchInventories};
