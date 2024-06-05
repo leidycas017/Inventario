@@ -2,7 +2,13 @@ import { PrimaryActionButton } from '@/components/ui/Buttons/PrimaryActionButton
 import { SecondaryActionButton } from '@/components/ui/Buttons/SecondaryActionButton';
 import { Dialog } from '@/components/ui/Dialog';
 import { RequiredMark } from '@/components/ui/Forms/RequiredMark';
-import { Dispatch, SetStateAction, useState, SyntheticEvent } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  SyntheticEvent,
+  useEffect,
+} from 'react';
 import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 import axios, { AxiosError } from 'axios';
@@ -22,12 +28,22 @@ const NewMaterialDialog = ({ open, setOpen }: NewMaterialDialogProps) => {
   const userData = dataUsuario?.user as iUserSessionData;
   const { users: usersList } = useGetUsers();
   const currentUserId = usersList?.find((u) => u.email == userData?.email)?.id;
+
   const [formData, setFormData] = useState({
     name: '',
     quantity: 0,
-    userId: currentUserId,
+    userId: '',
     updatedAt: new Date().toISOString(),
   });
+
+  useEffect(() => {
+    if (currentUserId) {
+      setFormData((prevData) => ({
+        ...prevData,
+        userId: currentUserId,
+      }));
+    }
+  }, [currentUserId]);
 
   const submitForm = async (e: SyntheticEvent) => {
     e.preventDefault();

@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaDolly } from 'react-icons/fa6';
+import { FaUserPlus } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { PrivateComponent } from '@/components/PrivateComponent';
+import { SiBookstack } from 'react-icons/si';
 
 interface SideNavigationProps {
   name: string;
@@ -116,9 +119,21 @@ const SideNavigation = ({
         >
           <div>
             <ul className='flex flex-1 flex-col gap-1 py-3'>
+              <PrivateComponent roleName='ADMIN'>
+                <NavbarLink
+                  href='/usuarios'
+                  title='Usuarios'
+                  icon={<FaUserPlus />}
+                />
+              </PrivateComponent>
               <NavbarLink
-                href='/usuarios'
-                title='Usuarios'
+                href='/materiales'
+                title='materiales'
+                icon={<SiBookstack />}
+              />
+              <NavbarLink
+                href='/inventories'
+                title='inventario'
                 icon={<FaDolly />}
               />
             </ul>

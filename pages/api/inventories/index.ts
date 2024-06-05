@@ -1,11 +1,14 @@
 import { prisma } from "@/service/prisma";
+
 import { InventoryMovement, Enum_MovementType } from "@prisma/client";
+
 import { NextApiRequest, NextApiResponse } from "next";
 
 interface Response {
     inventories?: InventoryMovement[];
     message?: string;
 }
+
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Response>) => {
    if(req.method === 'GET'){
